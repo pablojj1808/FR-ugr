@@ -9,44 +9,81 @@ import java.net.Socket;
 // YodafyServidorIterativo
 // (CC) jjramos, 2012
 //
-public class YodafyServidorConcurrente {
+public class YodafyServidorIterativo {
 
     public static void main(String[] args) {
 
         // Puerto de escucha
         int port = 8989;
-        int hebrasActivas = 0;
-        ServerSocket socketServidor;
-        Socket socketConexion;
+        byte []buferEnvio = new byte[256];
+		byte []buferRecepcion = new byte[256];
 
+		// Datagramas
+		DatagramSocket socketServidor = null;
+        DatagramPacket paquete = null;
+        DatagramPacket paqueteModificado = null;
+        InetAddress direccion;		
+
+        String frase;
+        
+        // Se crea el socket para la comunicación mediante datagramas.
         try {
-            // Abrimos el socket en modo pasivo, escuchando el en puerto indicado por "port"
-            //////////////////////////////////////////////////
-            socketServidor = new ServerSocket(port);
-            //////////////////////////////////////////////////
-
-            // Mientras ... siempre!
-            do {
-
-                // Aceptamos una nueva conexión con accept()
-                /////////////////////////////////////////////////
-                socketConexion = socketServidor.accept();
-                //////////////////////////////////////////////////
-
-                // Creamos un objeto de la clase ProcesadorYodafy, pasándole como 
-                // argumento el nuevo socket, para que realice el procesamiento
-                // Este esquema permite que se puedan usar hebras más fácilmente.
-                hebrasActivas++;
-                ProcesadorYodafyConcurrente procesador = new ProcesadorYodafyConcurrente(socketConexion, hebrasActivas);
-                procesador.procesa();
-
-            } while (true);
-
+            socketServidor = new DatagramSocket(port);
         } catch (IOException e) {
-            System.err.println("Error al escuchar en el puerto " + port);
-        } catch(InterruptedException e1) {
-            System.err.println("Interrupted exception");
+            System.err.println("Error de entrada/salida al abrir el socket.");
         }
+
+        do {
+			paquete = new DatagramPacket(buferRecepcion, buferRecepcion.length);
+
+            // Se recibe el paquete con el mensaje a yodificar.
+            try {
+                socketServidor.receive(paquete);
+            } catch (IOException e) {
+                System.err.println("Error de entrada/salida al abrir el socket.");
+            }
+
+            // Se extraen todos los datos del paquete.
+            frase = paquete.getData();
+            direccion = paquete.getAddress();
+            port = paquete.getPort();
+
+            // Incluimos la función de yodificar
+            ////////////////////////////////////
+            String[] s = frase.split(" ");
+            String resultado = "";
+
+            Random random = new Random();
+
+            for (int i = 0; i < s.length; i++) {
+                int j = random.nextInt(s.length);
+                int k = random.nextInt(s.length);
+                String tmp = s[j];
+
+                s[j] = s[k];
+                s[k] = tmp;
+            }
+
+            resultado = s[0];
+
+            for (int i = 1; i < s.length; i++) {
+                resultado += " " + s[i];
+            }
+            ////////////////////////////////////
+
+            buferEnvio = resultado.getBytes();
+
+            // Se crea un nuevo paquete con el mensaje yodificado
+            paqueteModificado = new DatagramPacket(buferEnvio, buferEnvio.length, direccion, port);
+
+            // Se envia el nuevo paquete con el mensaje yodificado incluido
+            try {
+                socketServidor.send(paqueteModificado);
+            } catch (IOException e) {
+                System.err.println("Error de entrada/salida al abrir el socket.");
+            }
+            
+        } while (true);
 
     }
 
