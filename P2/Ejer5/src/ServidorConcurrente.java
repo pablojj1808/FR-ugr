@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,24 +9,35 @@ import java.net.Socket;
  * @author Pablo Jiménez Jiménez pablojj1808@correo.ugr.es
  */
 public class ServidorConcurrente {
+    
+    private static int conectados = 0;
+    private static final int MAXconectados = 3;
 
     public static void main(String[] args) {
 
+        Socket socketCliente = null;
         ServerSocket serverSocket;
         final int port = 9999;
 
+        
+
         try {
             serverSocket = new ServerSocket(port);
+
             do {
-                // Aceptamos conexiones al servidor.
-                Socket socketServicio = serverSocket.accept();
+                // Aceptamos conexiones de los clientes
+                socketCliente = serverSocket.accept();
+                System.out.println("Cliente conectado");
+                conectados++;
+                
+                
                 // Creamos un objeto de la clase ProcesadorPasa, pasándole como 
                 // argumento el nuevo socket, para que realice el procesamiento
                 // Este esquema permite que se puedan usar hebras más fácilmente.
-                Procesador procesador = new Procesador(socketServicio);
+                Procesador procesador = new Procesador(socketCliente);
                 procesador.start();
 
-            } while (true);
+            } while (conectados != MAXconectados);
 
         } catch (IOException ex) {
             System.err.println("No se ha podido conectar en el puerto = " + port);
