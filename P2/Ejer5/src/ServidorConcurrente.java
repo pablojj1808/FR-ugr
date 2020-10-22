@@ -1,10 +1,6 @@
-package ejer5;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Implementación de un servidor concurrente
@@ -28,7 +24,7 @@ public class ServidorConcurrente {
                 // Este esquema permite que se puedan usar hebras más fácilmente.
                 Procesador procesador = new Procesador(socketServicio);
                 procesador.start();
-                
+
             } while (true);
 
         } catch (IOException ex) {
