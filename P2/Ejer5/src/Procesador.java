@@ -65,12 +65,18 @@ class Procesador extends Thread {
                         correctas++;
                     }
                     pasada++;
-                    if(pasada == 3) fin_del_juego = true;
+                    if(pasada == 2) fin_del_juego = true;
                 }
                 
                 hablarCliente("FIN_JUEGO");
             }
 
+            
+            hablarCliente("\t Has acertado " + pasada + " preguntas");
+            System.out.println("terminado");
+            
+            socketCliente.close();
+            
         } catch (IOException e) {
             System.err.println("Error al obtener los flujso de entrada/salida.");
         }

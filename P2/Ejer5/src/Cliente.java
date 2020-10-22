@@ -45,23 +45,17 @@ public class Cliente {
             String recibido = in.nextLine();
             mandarServidor(recibido);
             
-            while(!recibido.equals("FIN_JUEGO")) {
-                System.out.println(inReader.readLine());
+            do {
+                if(!recibido.equals("FIN_JUEGO"))
+                    System.out.println("-->" + inReader.readLine());
                 recibido = in.nextLine();
                 mandarServidor(recibido);
-            }
-//
-//            // enviamos el codigo play para indicar que deseamos jugar y que se inicie el servicio
-//            outPrinter.println(respuesta);
-//            outPrinter.flush();
-            //System.out.println(recibido);
-            //el mensaje recibido debe ser comenzemos
-            //if (recibido.equals("yes")) {
-            //  System.out.println("Preparados para empezar a jugar");
-            // 1.imprimir las letras a jugar
-            // 2. imprimir la pregunta
-            // 3. captar y enviar respuesta
-            // 4. imprimir resultado
+            } while(!recibido.equals("FIN_JUEGO"));
+            
+            //System.out.println(inReader.readLine());
+            
+            socketServicio.close();
+            
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

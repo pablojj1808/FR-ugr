@@ -39,6 +39,9 @@ public class ServidorConcurrente {
 
             } while (conectados != MAXconectados);
 
+            socketCliente.close();
+            serverSocket.close();
+            
         } catch (IOException ex) {
             System.err.println("No se ha podido conectar en el puerto = " + port);
         }
