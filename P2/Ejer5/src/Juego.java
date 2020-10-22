@@ -9,13 +9,22 @@ public class Juego {
     private List<Jugador> jugadores;
     private int jugadorActual; //Numero a adivinar
     private Diccionario dico;
+    private boolean finalJuego;
+    private int pasos;
 
     private static Juego juego = null;
-    private static int numJugadoresCreados = 0;
+    
+    private void aumentarPasos() {
+        if(pasos == 2) finalJuego= true;
+        pasos = 0;
+    }
 
     public Juego() {
         jugadorActual = 0;
         jugadores = new ArrayList<>();
+        finalJuego = false;
+        pasos = 0;
+        dico = new Diccionario();
     }
     
     public void aniadirJugador(String nombre) {
@@ -42,4 +51,21 @@ public class Juego {
         }
     }
     
+    public int getNumJugadores() {
+        return jugadores.size();
+    }
+    
+    public boolean finalJuego() {
+        return finalJuego;
+    }
+    
+    public List informarLetras() {
+        return dico.letrasSeleccionadas();
+    }
+    
+    public String sigPregunta() {
+        String algo = dico.def((String)dico.letrasSeleccionadas().get(pasos));
+        aumentarPasos();
+        return algo;
+    }
 }

@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author pablojj
  */
 public class Cliente {
-    
+
     private static BufferedReader inReader;
     private static PrintWriter outPrinter;
 
@@ -34,28 +34,17 @@ public class Cliente {
             inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
             outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
 
-            //System.out.println("preparado?: ");
-            // recibimos el mensaje de respuesta del servidor indicando que atiende nuestra peticion
-            //String rptas = in.nextLine();
-            //System.out.println(recibido);
-            //el mensaje recibido debe ser comenzemos
             System.out.println(inReader.readLine());
+            String respuesta = in.nextLine();
+            mandarServidor(respuesta);
             System.out.println(inReader.readLine());
-            System.out.println(inReader.readLine());
-            String recibido = in.nextLine();
-            mandarServidor(recibido);
-            
+
             do {
-                if(!recibido.equals("FIN_JUEGO"))
-                    System.out.println(inReader.readLine());
-                recibido = in.nextLine();
-                mandarServidor(recibido);
-            } while(!recibido.equals("FIN_JUEGO"));
-            
-            //System.out.println(inReader.readLine());
-            
-            socketServicio.close();
-            
+                respuesta = in.nextLine();
+                mandarServidor(respuesta);
+            } while (true);
+
+            //socketServicio.close();
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
