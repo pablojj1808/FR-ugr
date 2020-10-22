@@ -47,7 +47,7 @@ public class Cliente {
             
             do {
                 if(!recibido.equals("FIN_JUEGO"))
-                    System.out.println("-->" + inReader.readLine());
+                    System.out.println(inReader.readLine());
                 recibido = in.nextLine();
                 mandarServidor(recibido);
             } while(!recibido.equals("FIN_JUEGO"));

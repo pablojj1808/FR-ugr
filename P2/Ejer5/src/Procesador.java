@@ -13,20 +13,15 @@ import java.util.List;
  */
 class Procesador extends Thread {
 
+    private Juego juego;
     private Socket socketCliente;
-    private int palabrasMostradas;
-
-    private List definiciones;
-    private List respuestas;
 
     BufferedReader inReader = null;
     PrintWriter outPrinter = null;
 
-    int pasada;
-    int correctas;
-    boolean fin_del_juego;
-
-    private static Diccionario dico = new Diccionario();
+    private static boolean fin_del_juego;
+    private static numJugadores = 0;
+    private static final int MAX_JUGADORES = 1;
 
     Procesador(Socket socketServicio) {
         this.socketCliente = socketServicio;
@@ -38,6 +33,7 @@ class Procesador extends Thread {
         pasada = 0;
         correctas = 0;
         fin_del_juego = false;
+        numJugadores++;
     }
 
     @Override
@@ -47,6 +43,16 @@ class Procesador extends Thread {
             // Obtiene los flujos de escritura/lectura
             inReader = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
+
+            if(numJugadores == MAX_JUGADORES){  
+                System.out.println("¡Bienvenido " + user + " eres " + juego.getJugadorActual() + "!");
+                outPrint.println(Integer.toString(juego.getJugadorActualNumero()));
+                juego.cambiarJugador();
+            }else{
+                System.out.println("¡ERROR AL CONECTAR, MAXIMO NUMERO DE JUGADORES: " + juego.getNumMaxJugadores() + "!");
+                outPrint.println("maximo");
+                socketServicio.close();
+            }
 
             //recibimos le mensaje inicial que nos da el cliente, debera ser play 
             //para poder comenzar el juego
