@@ -1,16 +1,14 @@
 # FR-ugr
-Revisar:
+-----
+## Tutoría 26-10-2020
+
+- [ ] P1 : Último ejercicio hacer página restringida.
+- [ ] Hasta que no estén conectados todos los jugadores no empiece el juego.
+  - Ahora empieza en la primera terminal y en el resto no.
+- [ ] Como puedo hacer para que si no se contesta en x tiempo pase a la siguiente pregunta.
+- [ ] Pasa algo por mostrar ejemplos asi cutres o hay que meter preguntas y eso...
+- [ ] Se entregan los .java o el formato de carpetas denetbeans es válido.
+	   
+	   
+## Entrega Práctica 1
 	[] - YodafyClienteTCP : revisar linea 19
-	
-	P1:
-	   - Último ejercicio hacer página restringida.
-	
-	[] - no se por que cuando acaba la aplicación no se cierra.
-	   - hasta que no estén conectados todos los que deben no empiece el juego.
-	   - como podría hacer para que si no se contesta en x tiempo pase a la siguiente palabra	  
-	   - como puedo mostrar el nombre del ganador
-	   - pasa algo por mostrar ejemplos asi cutres
-	   - se entrega en formato netbeans o solo los .java
-	   -El codigo de los mensajes que se envian...
-	   
-	   
