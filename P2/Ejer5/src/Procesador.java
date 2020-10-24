@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -22,18 +20,21 @@ class Procesador extends Thread {
     private static boolean fin_del_juego;
     private static int numJugadores = 0;
     private static final int MAX_JUGADORES = 1;
+    private int jugActual;
 
     Procesador(Socket socketServicio) {
         this.socketCliente = socketServicio;
        this.juego = Juego.getInstanceJuego();
         fin_del_juego = false;
         numJugadores++;
+        jugActual= numJugadores; // se empieza a contar en 1
     }
 
     @Override
     public void run() {
         try {
-
+            System.out.println("Hebra " + jugActual + " lanzada");
+            
             // Obtiene los flujos de escritura/lectura
             inReader = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
@@ -47,11 +48,11 @@ class Procesador extends Thread {
             if(juego.getNumJugadores() == MAX_JUGADORES){  
                 
                 do {
-                    var a = juego.sigPregunta();
-                    System.out.println(a);
-                    hablarCliente(a);
+                                        
+                    hablarCliente(juego.sigPregunta());
                     String respuesta = inReader.readLine();
-                    
+                    juego.registrarRespuesta(respuesta, jugActual);
+                    System.out.println(juego.finalJuego());
                 } while(!juego.finalJuego());
                 
             }

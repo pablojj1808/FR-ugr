@@ -16,7 +16,7 @@ public class Juego {
     
     private void aumentarPasos() {
         if(pasos == 2) finalJuego= true;
-        pasos = 0;
+        else pasos++;
     }
 
     public Juego() {
@@ -28,7 +28,7 @@ public class Juego {
     }
     
     public void aniadirJugador(String nombre) {
-        jugadores.add(new Jugador(nombre, 0, jugadores.size()));
+        jugadores.add(new Jugador(nombre, jugadores.size()));
     }
 
     public static Juego getInstanceJuego() {
@@ -67,5 +67,11 @@ public class Juego {
         String algo = dico.def((String)dico.letrasSeleccionadas().get(pasos));
         aumentarPasos();
         return algo;
+    }
+    
+    public void registrarRespuesta(String respuesta, int jugador) {
+        String respuestaCorrecta = dico.respuesta((String)dico.letrasSeleccionadas().get(pasos));
+        if(respuesta.equals(respuestaCorrecta))
+            jugadores.get(jugador - 1).aumentarAcertadas();
     }
 }

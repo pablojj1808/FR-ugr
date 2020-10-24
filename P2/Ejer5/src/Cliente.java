@@ -40,6 +40,7 @@ public class Cliente {
             System.out.println(inReader.readLine());
 
             do {
+                System.out.println(inReader.readLine());
                 respuesta = in.nextLine();
                 mandarServidor(respuesta);
             } while (true);

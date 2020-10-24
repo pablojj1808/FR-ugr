@@ -9,13 +9,10 @@ import java.net.Socket;
  * @author Pablo Jiménez Jiménez pablojj1808@correo.ugr.es
  */
 public class ServidorConcurrente {
-    
-    private static int conectados = 0;
-    private static final int MAXconectados = 3;
-
+   
     public static void main(String[] args) {
 
-        Socket socketCliente = null;
+        Socket socketCliente;
         ServerSocket serverSocket;
         final int port = 9999;
 
@@ -28,7 +25,6 @@ public class ServidorConcurrente {
                 // Aceptamos conexiones de los clientes
                 socketCliente = serverSocket.accept();
                 System.out.println("Cliente conectado");
-                conectados++;
                 
                 
                 // Creamos un objeto de la clase ProcesadorPasa, pasándole como 
@@ -37,10 +33,10 @@ public class ServidorConcurrente {
                 Procesador procesador = new Procesador(socketCliente);
                 procesador.start();
 
-            } while (conectados != MAXconectados);
+            } while (true);
 
-            socketCliente.close();
-            serverSocket.close();
+//            socketCliente.close();
+//            serverSocket.close();
             
         } catch (IOException ex) {
             System.err.println("No se ha podido conectar en el puerto = " + port);

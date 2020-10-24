@@ -9,9 +9,9 @@ public class Jugador {
     private int acertadas;
     private int num;
 
-    public Jugador(String nombre, int acertadas, int num) {
+    public Jugador(String nombre, int num) {
         this.nombre = nombre;
-        this.acertadas = acertadas;
+        this.acertadas = 0;
         this.num = num;
     }
 
@@ -27,5 +27,7 @@ public class Jugador {
         return num;
     }
     
-    
+    public void aumentarAcertadas() {
+        acertadas++;
+    }
 }

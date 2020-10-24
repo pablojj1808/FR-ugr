@@ -10,6 +10,7 @@ Revisar:
 	   - como podría hacer para que si no se contesta en x tiempo pase a la siguiente palabra	  
 	   - como puedo mostrar el nombre del ganador
 	   - pasa algo por mostrar ejemplos asi cutres
-	   - 
+	   - se entrega en formato netbeans o solo los .java
+	   -El codigo de los mensajes que se envian...
 	   
 	   
