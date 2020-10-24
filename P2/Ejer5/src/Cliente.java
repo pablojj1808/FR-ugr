@@ -38,18 +38,32 @@ public class Cliente {
             String respuesta = in.nextLine();
             mandarServidor(respuesta);
             System.out.println(inReader.readLine());
-
+            String leido = null;
+            
             do {
-                System.out.println(inReader.readLine());
-                respuesta = in.nextLine();
+                leido = inReader.readLine();
+                System.out.println(leido);
+                if(!leido.equals("FIN DEL JUEGO"))
+                    respuesta = in.nextLine();
                 mandarServidor(respuesta);
-            } while (true);
-
-            //socketServicio.close();
+                
+            } while (!leido.equals("FIN DEL JUEGO"));
+            
+            // Vamos a imprimir resultados
+            leido = inReader.readLine();
+            System.out.println(leido);
+            
+            
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             System.err.println("Error de entrada/salida al abrir el socket.");
+        } finally {
+            try {
+                socketServicio.close();
+            } catch (IOException ex) {
+                System.err.println("Fallo al cerrar socket.");
+            }
         }
 
     }

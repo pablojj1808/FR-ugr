@@ -74,4 +74,10 @@ public class Juego {
         if(respuesta.equals(respuestaCorrecta))
             jugadores.get(jugador - 1).aumentarAcertadas();
     }
+    
+    public String getResultados() {
+        String salida = "";
+        salida = jugadores.stream().map(j -> j.getNombre() + ". Ha acertado: " + j.getAcertadas() + "\n").reduce(salida, String::concat);
+        return salida;
+    }
 }
