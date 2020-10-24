@@ -19,7 +19,7 @@ class Procesador extends Thread {
     
     private static boolean fin_del_juego;
     private static int numJugadores = 0;
-    private static final int MAX_JUGADORES = 2;
+    private static final int MAX_JUGADORES = 1;
     private int jugActual;
     
     Procesador(Socket socketServicio) {
@@ -49,7 +49,7 @@ class Procesador extends Thread {
                 
                 do {
                     
-                    hablarCliente(juego.sigPregunta());
+                    hablarCliente(Color.YELLOW + juego.sigPregunta() + Color.RST);
                     String respuesta = inReader.readLine();
                     juego.registrarRespuesta(respuesta, jugActual);
                     System.out.println(juego.finalJuego());
