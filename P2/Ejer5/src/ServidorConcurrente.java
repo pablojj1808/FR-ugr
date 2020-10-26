@@ -16,7 +16,7 @@ public class ServidorConcurrente {
         ServerSocket serverSocket;
         final int port = 9999;
 
-        
+        // hilo principal , puedo chekear el resto
 
         try {
             serverSocket = new ServerSocket(port);
