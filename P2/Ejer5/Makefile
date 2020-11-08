@@ -5,8 +5,7 @@ default:
 	$(JAVAC) Cliente.java
 	$(JAVAC) ServidorConcurrente.java
 	$(JAVAC) Procesador.java
-	java ServidorConcurrente
-	java Cliente
+
 
 clean:
 	rm *.class

@@ -25,6 +25,7 @@ public class Juego {
                    + "|  |  |  |\n"
                    + "----------\n"
                    + "|  |  |  |\n";
+                   
         return tab;
     }
     

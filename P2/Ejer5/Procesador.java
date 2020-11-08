@@ -31,11 +31,8 @@ class Procesador extends Thread {
             inReader = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
 
-            hablarCliente("Introduce tu nombre cuando estes listo: ");
-            String recibido = inReader.readLine();
-            
-
             hablarCliente(juego.pintarTab());
+            
             
             socketCliente.close();
         } catch (IOException e) {
@@ -44,6 +41,7 @@ class Procesador extends Thread {
     }
 
     private void hablarCliente(String s) {
+        System.out.println(s);
         outPrinter.println(s);
         outPrinter.flush();
     }

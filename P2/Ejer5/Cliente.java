@@ -34,24 +34,13 @@ public class Cliente {
             inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
             outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
 
+            System.out.println("espero a que me hable el servidor");
             System.out.println(inReader.readLine());
-            String respuesta = in.nextLine();
-            mandarServidor(respuesta);
             System.out.println(inReader.readLine());
-            String leido = null;
+            System.out.println(inReader.readLine());
+            System.out.println(inReader.readLine());
+            System.out.println(inReader.readLine());
             
-            do {
-                leido = inReader.readLine();
-                System.out.println(leido);
-                if(!leido.equals("FIN DEL JUEGO"))
-                    respuesta = in.nextLine();
-                mandarServidor(respuesta);
-                
-            } while (!leido.equals("FIN DEL JUEGO"));
-            
-            // Vamos a imprimir resultados
-            leido = inReader.readLine();
-            System.out.println(leido);
             
             
         } catch (UnknownError ex) {

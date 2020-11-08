@@ -6,7 +6,8 @@ import java.net.Socket;
 /**
  * Implementación de un servidor concurrente
  *
- * @author Pablo Jiménez Jiménez pablojj1808@correo.ugr.es
+ * @author Pablo Jiménez Jiménez 
+ *         (pablojj1808@correo.ugr.es)
  */
 public class ServidorConcurrente {
    
@@ -39,6 +40,5 @@ public class ServidorConcurrente {
         } catch (IOException ex) {
             System.err.println("No se ha podido conectar en el puerto = " + port);
         }
-
     }
 }
