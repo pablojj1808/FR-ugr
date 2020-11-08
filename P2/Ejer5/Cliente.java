@@ -61,7 +61,7 @@ public class Cliente {
 
     }
 
-    private static void leerTablero() {
+    private static void leerTablero() throws Exception {
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());

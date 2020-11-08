@@ -5,7 +5,7 @@ public class Juego {
 
     private static Juego juego;
     private char[][] tablero;
-    private static final char INICIO = ' ';
+    private static final char INICIO = '_';
     private static final char JUG1 = 'X';
     private static final char JUG2 = 'O';
     private static boolean consumidoJug1 = false;
@@ -16,19 +16,25 @@ public class Juego {
     }
     
     public Juego() {
-        tablero = new char[3][3];
-        for(int i=0; i<3; i++)
-            for(int j=0; j<3; j++)
+        tablero = new char[4][4];
+        for(int i=0; i<4; i++)
+            for(int j=0; j<4; j++)
                 tablero[i][j] = INICIO;
     }
     
     public String pintarTab() {
-        String tab = "|  |  |  |\n"
-                   + "----------\n"
-                   + "|  |  |  |\n"
-                   + "----------\n"
-                   + "|  |  |  |\n";
+        /*String tab = """
+                    |_|_|_|_|
+                    |_|_|_|_|
+                    |_|_|_|_|
+                    |_|_|_|_|
+                    """;*/
+        String tab = "";
+        for(int i=0; i<4; i++)
+            for(int j=0; j<4; j++)
+                tab += "|" + tablero[i][j] + "|" + "|" + tablero[i][j] + "|" + "|" + tablero[i][j] + "|" + "|" + tablero[i][j] + "|";
                    
+        System.out.println(tab);
         return tab;
     }
     
