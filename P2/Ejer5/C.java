@@ -5,8 +5,12 @@
  *
  * @author pablojj
  */
-public class Color {
-    public static final String BLACK = "\u001B[30m";
+public class C {
+    
+    public static  String black(String x) {
+        return BLACK + x + RST;
+    }
+    public static final String BLACK = "\u001B[31m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
     public static final String YELLOW = "\u001B[33m";

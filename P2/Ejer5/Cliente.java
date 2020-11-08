@@ -21,7 +21,7 @@ public class Cliente {
         // Nombre del host donde se ejecuta el servidor y puerto por donde 
         // escucha
         String host = "localhost";
-        final int port = 9999;
+        final int port = 9909;
 
         Socket socketServicio = null;
         Scanner in = new Scanner(System.in);
