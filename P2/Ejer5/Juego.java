@@ -6,6 +6,9 @@ public class Juego {
     private static Juego juego;
     private char[][] tablero;
     private static final char INICIO = ' ';
+    private static final char JUG1 = 'X';
+    private static final char JUG2 = 'O';
+    private static boolean consumidoJug1 = false;
     
     static Juego getInstance() {
         if(juego == null) juego = new Juego();
@@ -33,4 +36,11 @@ public class Juego {
         return tablero[f][c];
     }
     
+    public char asignarFichas() {
+        if(consumidoJug1) return JUG2;
+        else {
+            consumidoJug1 = true;
+            return JUG1;
+        }
+    }
 }

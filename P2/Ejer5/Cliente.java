@@ -33,13 +33,17 @@ public class Cliente {
             //obtener los flujos en modo texto
             inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
             outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
+            
+            
+            
+        
 
-            System.out.println("espero a que me hable el servidor");
-            System.out.println(inReader.readLine());
-            System.out.println(inReader.readLine());
-            System.out.println(inReader.readLine());
-            System.out.println(inReader.readLine());
-            System.out.println(inReader.readLine());
+                System.out.println(inReader.readLine());
+
+                leerTablero();
+
+            
+            
             
             
             
@@ -55,6 +59,14 @@ public class Cliente {
             }
         }
 
+    }
+
+    private static void leerTablero() {
+        System.out.println(inReader.readLine());
+        System.out.println(inReader.readLine());
+        System.out.println(inReader.readLine());
+        System.out.println(inReader.readLine());
+        System.out.println(inReader.readLine());
     }
 
     private static void mandarServidor(String s) {

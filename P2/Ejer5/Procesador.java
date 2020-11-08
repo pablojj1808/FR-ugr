@@ -30,7 +30,7 @@ class Procesador extends Thread {
             // Obtiene los flujos de escritura/lectura
             inReader = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
-
+            hablarCliente("Tu ficha: " + juego.asignarFichas());
             hablarCliente(juego.pintarTab());
             
             
