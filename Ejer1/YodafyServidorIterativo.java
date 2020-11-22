@@ -4,10 +4,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-//
-// YodafyServidorIterativo
-// (CC) jjramos, 2012
-//
+
 public class YodafyServidorIterativo {
 
 	public static void main(String[] args) {
