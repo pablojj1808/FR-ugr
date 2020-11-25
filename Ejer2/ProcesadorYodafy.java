@@ -2,9 +2,7 @@
 // YodafyServidorIterativo
 // (CC) jjramos, 2012
 //
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Random;
 
@@ -12,7 +10,7 @@ import java.util.Random;
 //
 // Nota: si esta clase extendiera la clase Thread, y el procesamiento lo hiciera el método "run()",
 // ¡Podríamos realizar un procesado concurrente! 
-//
+//ProcesadorYodafy
 public class ProcesadorYodafy {
 	// Referencia a un socket para enviar/recibir las peticiones/respuestas
 	private Socket socketServicio;
@@ -34,14 +32,6 @@ public class ProcesadorYodafy {
 	// Aquí es donde se realiza el procesamiento realmente:
 	void procesa(){
 		
-		// Como máximo leeremos un bloque de 1024 bytes. Esto se puede modificar.
-		byte [] datosRecibidos=new byte[1024];
-		int bytesRecibidos=0;
-		
-		// Array de bytes para enviar la respuesta. Podemos reservar memoria cuando vayamos a enviarka:
-		byte [] datosEnviar;
-		
-		
 		try {
 			// Obtiene los flujos de escritura/lectura
 			inputStream=socketServicio.getInputStream();
@@ -49,22 +39,29 @@ public class ProcesadorYodafy {
 			
 			// Lee la frase a Yodaficar:
 			////////////////////////////////////////////////////////
-			bytesRecibidos = inputStream.read(datosRecibidos);
+		
+			String datosRecibidos="";
+			BufferedReader inReader=new BufferedReader(new InputStreamReader(inputStream));
+			datosRecibidos=datosRecibidos+inReader.readLine();
+
 			////////////////////////////////////////////////////////
-			
+
 			// Yoda hace su magia:
 			// Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
-			String peticion=new String(datosRecibidos,0,bytesRecibidos);
+			// String peticion=new String(datosRecibidos,0,bytesRecibidos);
+
+
 			// Yoda reinterpreta el mensaje:
-			String respuesta=yodaDo(peticion);
+			String respuesta=yodaDo(datosRecibidos);
 			// Convertimos el String de respuesta en una array de bytes:
-			datosEnviar=respuesta.getBytes();
-			
+
 			// Enviamos la traducción de Yoda:
 			////////////////////////////////////////////////////////
-			outputStream.write(datosEnviar, 0, datosEnviar.length);
+
+			PrintWriter outPrinter=new PrintWriter(outputStream, true);
+			outPrinter.println(respuesta);
+
 			////////////////////////////////////////////////////////
-			
 			
 			
 		} catch (IOException e) {
