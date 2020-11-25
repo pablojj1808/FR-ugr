@@ -32,8 +32,7 @@ public class ProcesadorYodafy {
 		
 		// Array de bytes para enviar la respuesta. Podemos reservar memoria cuando vayamos a enviarka:
 		byte [] datosEnviar;
-		
-		try {
+    
 			// Recepcion del paquete enviado por el cliente 
 
 			DatagramPacket paquete;
@@ -57,11 +56,6 @@ public class ProcesadorYodafy {
 			paquete = new DatagramPacket(datosEnviar, datosEnviar.length, direccion, port);
 			socketUDPservidor.send(paquete);
 			socketUDPservidor.close();
-			
-			
-		} catch (IOException e) {
-
-		}
 
 	}
 
