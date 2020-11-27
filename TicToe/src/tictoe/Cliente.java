@@ -1,3 +1,5 @@
+package tictoe;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,18 +40,11 @@ public class Cliente {
             
         
 
-                System.out.println(inReader.readLine());
-
-            try {
-                leerTablero();
-            } catch (Exception ex) {
-                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            
-            
-            
-            
+            System.out.println(inReader.readLine());
+            leerTablero();
+            System.out.println(inReader.readLine());
+            mandarServidor(in.nextLine());
+            leerTablero();
             
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,9 +60,7 @@ public class Cliente {
 
     }
 
-    private static void leerTablero() throws Exception {
-        System.out.println(inReader.readLine());
-        System.out.println(inReader.readLine());
+    private static void leerTablero() throws IOException {
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());

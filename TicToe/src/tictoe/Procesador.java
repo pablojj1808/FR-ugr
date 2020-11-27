@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import tictoe.Juego;
 
 /**
  *
@@ -35,7 +34,10 @@ class Procesador extends Thread {
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
             hablarCliente("Tu ficha: " + juego.asignarFichas());
             hablarCliente(juego.pintarTab());
-            
+            hablarCliente("Introduce tu jugada (1-3,1-3): ");
+            var algo = inReader.readLine();
+            juego.putFicha(algo);
+            hablarCliente(juego.pintarTab());
             
             socketCliente.close();
         } catch (IOException e) {
@@ -44,7 +46,6 @@ class Procesador extends Thread {
     }
 
     private void hablarCliente(String s) {
-        System.out.println(s);
         outPrinter.println(s);
         outPrinter.flush();
     }
