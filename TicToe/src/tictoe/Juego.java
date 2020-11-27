@@ -1,3 +1,5 @@
+package tictoe;
+
 
 
 // CLase singleton

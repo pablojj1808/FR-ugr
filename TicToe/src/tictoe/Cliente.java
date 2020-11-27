@@ -40,7 +40,11 @@ public class Cliente {
 
                 System.out.println(inReader.readLine());
 
+            try {
                 leerTablero();
+            } catch (Exception ex) {
+                Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             
             
