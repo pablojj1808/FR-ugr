@@ -38,14 +38,14 @@ class Procesador extends Thread {
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
             hablarCliente("Tu ficha: " + juego.asignarFichas());
             hablarCliente(juego.pintarTab());
-            hablarCliente("Introduce tu jugada (1-3,1-3): ");
+            hablarCliente("Introduce tu jugada (1-3,1-3): \n");
             var algo = inReader.readLine();
             juego.putFicha(algo);
             hablarCliente(juego.pintarTab());
             
             socketCliente.close();
         } catch (IOException e) {
-            System.err.println("Error al obtener los flujso de entrada/salida.");
+            System.err.println("Error al obtener los flujos de entrada/salida.");
         } 
     }
 

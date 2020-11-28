@@ -39,16 +39,13 @@ public class Cliente {
             //obtener los flujos en modo texto
             inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
             outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
-            
-            
-            
-        
 
-            System.out.println(inReader.readLine());
-            leerTablero();
-            System.out.println(inReader.readLine());
+            String line;
+            while ((line = inReader.readLine()) != null) {
+                System.out.println(line);
+            }
+
             mandarServidor(in.nextLine());
-            leerTablero();
             
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);

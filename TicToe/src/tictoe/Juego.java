@@ -63,7 +63,7 @@ public class Juego {
     public void putFicha(String s) {
         putFicha(
                 (byte) Integer.parseInt(Character.toString(s.toCharArray()[0])),
-                (byte) Integer.parseInt(Character.toString(s.toCharArray()[2]))
+                (byte) Integer.parseInt(Character.toString(s.toCharArray()[1]))
         );
     }
 
