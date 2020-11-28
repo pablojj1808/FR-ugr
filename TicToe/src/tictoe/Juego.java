@@ -3,6 +3,14 @@ package tictoe;
 
 
 // follow Singleton pattern
+/*
+* @author Pablo Jiménez Jiménez 
+*         (pablojj1808@correo.ugr.es)
+* @author Sergio Fernández Vela
+*         (sergiofern@correo.ugr.es)
+*/
+
+
 public class Juego {
 
     private static Juego juego;

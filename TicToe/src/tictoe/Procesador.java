@@ -9,8 +9,12 @@ import java.net.Socket;
 
 /**
  *
- * @author pablojj
+ * @author Pablo Jiménez Jiménez 
+ *         (pablojj1808@correo.ugr.es)
+ * @author Sergio Fernández Vela
+ *         (sergiofern@correo.ugr.es)
  */
+
 class Procesador extends Thread {
 
     private static Juego juego;

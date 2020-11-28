@@ -12,7 +12,11 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author pablojj
+ *
+ * @author Pablo Jiménez Jiménez 
+ *         (pablojj1808@correo.ugr.es)
+ * @author Sergio Fernández Vela
+ *         (sergiofern@correo.ugr.es)
  */
 public class Cliente {
 

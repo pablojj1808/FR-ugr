@@ -5,7 +5,10 @@ package tictoe;
  * Clase para imprimir colores por la consola de
  * sistemas UNIX
  *
- * @author pablojj
+ * @author Pablo Jiménez Jiménez 
+ *         (pablojj1808@correo.ugr.es)
+ * @author Sergio Fernández Vela
+ *         (sergiofern@correo.ugr.es)
  */
 public class C {
     

@@ -10,8 +10,10 @@ import java.net.Socket;
  *
  * @author Pablo Jiménez Jiménez 
  *         (pablojj1808@correo.ugr.es)
- * @author 
+ * @author Sergio Fernández Vela
+ *         (sergiofern@correo.ugr.es)
  */
+
 public class ServidorConcurrente {
 
     private static final int MAX_CONEX = 2;
