@@ -35,16 +35,16 @@ public class Juego {
                 tablero[i][j] = INICIO;
     }
     
-    public void pintarTab() {
+    public String pintarTab() {
         String tab = "";
         for(int i=0; i<3; i++){
             for(int j=0; j<3; j++){
                 tab += "|" + tablero[i][j];
             }
-            tab+= "|\n";
+            tab += "|\n";
         }
-
-        System.out.println(tab);
+        
+        return tab;
     }
 
     public char asignarFichas() {

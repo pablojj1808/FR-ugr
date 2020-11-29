@@ -32,21 +32,23 @@ public class Cliente {
         try {
             // Creamos una conexion entre el cliente y el servidor
             socketServicio = new Socket(host, port);
-
+            String cond;
+            
             //obtener los flujos en modo texto
             inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
             outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
 
+            leerServidor(); // mando la ficha
             do {
+                
                 leerTablero();
                 leerServidor();
-                // String line;
-                // while ((line = inReader.readLine()) != null) {
-                //     System.out.println(line);
-                // }
-                mandarServidor(in.nextLine());
+                String ficha = in.nextLine();
+                mandarServidor(ficha);
+                cond = leerServidorR(); // leo si fin
+                System.out.println("he leido del supuesto final2: ." + cond + ".");
 
-            } while (inReader.readLine() != "FIN_DEL_JUEGO");
+            } while (cond != "FIN_DEL_JUEGO");
             in.close();
 
         } catch (UnknownError ex) {
@@ -64,12 +66,10 @@ public class Cliente {
     }
 
     private static void leerTablero() throws IOException {
-        
         System.out.println(inReader.readLine());
-//        System.out.println(inReader.readLine());
-//        System.out.println(inReader.readLine());
-//        System.out.println(inReader.readLine());
-        
+        System.out.println(inReader.readLine());
+        System.out.println(inReader.readLine());
+        System.out.println(inReader.readLine());
     }
 
     private static void mandarServidor(String s) {
@@ -79,5 +79,9 @@ public class Cliente {
 
     private static void leerServidor() throws IOException {
         System.out.println(inReader.readLine());
+    }
+    
+    private static String leerServidorR() throws IOException {
+        return inReader.readLine();
     }
 }
