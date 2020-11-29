@@ -40,12 +40,14 @@ public class Cliente {
             do {
                 leerTablero();
                 leerServidor();
+                // String line;
+                // while ((line = inReader.readLine()) != null) {
+                //     System.out.println(line);
+                // }
                 mandarServidor(in.nextLine());
+
             } while (inReader.readLine() != "FIN_DEL_JUEGO");
-            String line;
-            while ((line = inReader.readLine()) != null) {
-                System.out.println(line);
-            }
+            in.close();
 
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
