@@ -1,6 +1,5 @@
 package tictoe;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,10 +12,8 @@ import java.util.logging.Logger;
 /**
  *
  *
- * @author Pablo Jiménez Jiménez 
- *         (pablojj1808@correo.ugr.es)
- * @author Sergio Fernández Vela
- *         (sergiofern@correo.ugr.es)
+ * @author Pablo Jiménez Jiménez (pablojj1808@correo.ugr.es)
+ * @author Sergio Fernández Vela (sergiofern@correo.ugr.es)
  */
 public class Cliente {
 
@@ -40,13 +37,16 @@ public class Cliente {
             inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
             outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
 
+            do {
+                leerTablero();
+                leerServidor();
+                mandarServidor(in.nextLine());
+            } while (inReader.readLine() != "FIN_DEL_JUEGO");
             String line;
             while ((line = inReader.readLine()) != null) {
                 System.out.println(line);
             }
 
-            mandarServidor(in.nextLine());
-            
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -62,13 +62,20 @@ public class Cliente {
     }
 
     private static void leerTablero() throws IOException {
+        
         System.out.println(inReader.readLine());
-        System.out.println(inReader.readLine());
-        System.out.println(inReader.readLine());
+//        System.out.println(inReader.readLine());
+//        System.out.println(inReader.readLine());
+//        System.out.println(inReader.readLine());
+        
     }
 
     private static void mandarServidor(String s) {
         outPrinter.println(s);
         outPrinter.flush();
+    }
+
+    private static void leerServidor() throws IOException {
+        System.out.println(inReader.readLine());
     }
 }

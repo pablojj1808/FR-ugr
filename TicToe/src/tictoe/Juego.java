@@ -72,7 +72,7 @@ public class Juego {
         jugActual = jugActual % 2;
     }
 
-    private boolean algunGanador() {
+    public boolean algunGanador() {
         return filas() || cols() || diagonal1() || diagonal2();
     }
 
