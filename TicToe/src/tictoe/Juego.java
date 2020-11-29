@@ -37,11 +37,12 @@ public class Juego {
     
     public String pintarTab() {
         String tab = "";
-        for(int i=0; i<3; i++)
-            for(int j=0; j<3; j++)
-                tab += "|" + tablero[i][j] + "|"
-                        + tablero[i][j] + "|"
-                        + tablero[i][j] + "|\n";
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                tab += "|" + tablero[i][j];
+            }
+            tab+= "|\n";
+        }
 
         return tab;
     }

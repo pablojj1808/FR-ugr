@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
@@ -19,6 +20,8 @@ class Procesador extends Thread {
 
     private static Juego juego;
     private Socket socketCliente;
+    private static char fichaActual='X';
+    private ReentrantLock lock = new ReentrantLock();
 
     BufferedReader inReader = null;
     PrintWriter outPrinter = null;
@@ -26,6 +29,7 @@ class Procesador extends Thread {
      
     Procesador(Socket socketServicio) {
         this.socketCliente = socketServicio;
+        System.out.println(socketServicio.getInetAddress());
         juego =Juego.getInstance();
     }
 
@@ -36,13 +40,32 @@ class Procesador extends Thread {
             // Obtiene los flujos de escritura/lectura
             inReader = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
-            hablarCliente("Tu ficha: " + juego.asignarFichas());
+            char ficha=juego.asignarFichas();
+            hablarCliente("Tu ficha: " + ficha);
+            System.out.println("HA PASADO LA ASIGNACION\n" + fichaActual);
             do {
-                //hablarCliente(juego.pintarTab());
-                hablarCliente("Introduce tu jugada (1-3,1-3): \n");
-                var algo = inReader.readLine();
-                juego.putFicha(algo);
-                System.out.println(juego.pintarTab());
+                // System.out.println(ficha + "----" + fichaActual);
+                if(ficha==fichaActual){
+                    System.out.println("HA PASADO EL LOCK\n");
+                    lock.lock();
+                    try {
+                        
+                        //hablarCliente(juego.pintarTab());
+                        hablarCliente("Introduce tu jugada (1-3,1-3): \n");
+                        System.out.println("ESTA ESPERANDO A LA RESPUESTA\n");
+                        var algo = inReader.readLine();
+                        System.out.println("LA HA RECIBIDO\n");
+                        juego.putFicha(algo);
+                        System.out.println(juego.pintarTab());
+                        
+                        if(fichaActual=='X') fichaActual='O';
+                        else{fichaActual='X';}
+
+                    } finally {
+                        lock.unlock();
+                    }
+                }
+            
             } while(!juego.algunGanador());
             socketCliente.close();
         } catch (IOException e) {
