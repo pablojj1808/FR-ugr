@@ -35,7 +35,7 @@ public class Juego {
                 tablero[i][j] = INICIO;
     }
     
-    public String pintarTab() {
+    public void pintarTab() {
         String tab = "";
         for(int i=0; i<3; i++)
             for(int j=0; j<3; j++)
@@ -43,7 +43,7 @@ public class Juego {
                         + tablero[i][j] + "|"
                         + tablero[i][j] + "|\n";
 
-        return tab;
+        System.out.println(tab);
     }
 
     public char asignarFichas() {

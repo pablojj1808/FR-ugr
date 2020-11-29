@@ -42,7 +42,7 @@ class Procesador extends Thread {
                 hablarCliente("Introduce tu jugada (1-3,1-3): \n");
                 var algo = inReader.readLine();
                 juego.putFicha(algo);
-                System.out.println(juego.pintarTab());
+                juego.pintarTab();
             } while(!juego.algunGanador());
             socketCliente.close();
         } catch (IOException e) {
