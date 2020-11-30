@@ -40,6 +40,14 @@ class Procesador extends Thread {
             hablarCliente("Tu ficha: " + ficha);
             System.out.println("HA PASADO LA ASIGNACION\n" + fichaActual);
             do {
+                try 
+                {
+                    Thread.sleep(1000);
+                } 
+                catch(InterruptedException e)
+                {
+                    System.out.println("ERROR: Thread sleep " + e);
+                }
                 // System.out.println(ficha + "----" + fichaActual);
                 if (ficha == fichaActual) {
                     System.out.println("HA PASADO EL LOCK\n");
@@ -49,7 +57,7 @@ class Procesador extends Thread {
                         hablarCliente(juego.pintarTab());
                         hablarCliente("Introduce tu jugada (1-3,1-3): \n");
                         System.out.println("ESTA ESPERANDO A LA RESPUESTA\n");
-                        var algo = inReader.readLine();
+                        String algo = inReader.readLine();
                         System.out.println("LA HA RECIBIDO\n");
                         juego.putFicha(algo);
 
@@ -60,14 +68,14 @@ class Procesador extends Thread {
                             fichaActual = 'X';
                         }
 
-                        if (juego.algunGanador()) {
-                            System.out.println("FIIIIIN DEL JUEGOOOO");
-                            hablarCliente("FIN_DEL_JUEGO");
-                            fin = true;
-                        } else {
-                            System.out.println(">tenfo que seguir<");
-                            hablarCliente("_SIGO_");
-                        }
+                        // if (juego.algunGanador()) {
+                        //     System.out.println("FIIIIIN DEL JUEGOOOO");
+                        //     hablarCliente("FIN_DEL_JUEGO");
+                        //     fin = true;
+                        // } else {
+                        //     System.out.println(">tenfo que seguir<");
+                        //     hablarCliente("_SIGO_");
+                        // }
 
                     } finally {
                         lock.unlock();

@@ -46,7 +46,7 @@ public class Cliente {
                 String ficha = in.nextLine();
                 mandarServidor(ficha);
                 cond = leerServidorR(); // leo si fin
-                System.out.println("he leido del supuesto final2: ." + cond + ".");
+                // System.out.println("he leido del supuesto final2: ." + cond + ".");
 
             } while (cond != "FIN_DEL_JUEGO");
             in.close();
