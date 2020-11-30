@@ -17,8 +17,9 @@ class Procesador extends Thread {
     private static Juego juego;
     private Socket socketCliente;
     private static char fichaActual = 'X';
+    // private static String condicion = "NADA";
     private ReentrantLock lock = new ReentrantLock();
-    private boolean fin = false;
+    private static boolean fin = false;
 
     BufferedReader inReader = null;
     PrintWriter outPrinter = null;
@@ -53,33 +54,36 @@ class Procesador extends Thread {
                     System.out.println("HA PASADO EL LOCK\n");
                     lock.lock();
                     try {
+                        if (juego.algunGanador()) {
+                            System.out.println("FIIIIIN DEL JUEGOOOO");
+                            hablarCliente("FIN");
+                            fin = true;
+                        } else {
+                            System.out.println(">tenfo que seguir<");
+                            hablarCliente("_SIGO_");
+                        }
+                        if(!fin){
+                            hablarCliente(juego.pintarTab());
+                            hablarCliente("Introduce tu jugada (1-3,1-3): \n");
+                            System.out.println("ESTA ESPERANDO A LA RESPUESTA\n");
+                            String algo = inReader.readLine();
+                            System.out.println("LA HA RECIBIDO\n");
+                            juego.putFicha(algo);
 
-                        hablarCliente(juego.pintarTab());
-                        hablarCliente("Introduce tu jugada (1-3,1-3): \n");
-                        System.out.println("ESTA ESPERANDO A LA RESPUESTA\n");
-                        String algo = inReader.readLine();
-                        System.out.println("LA HA RECIBIDO\n");
-                        juego.putFicha(algo);
+                            System.out.println("Condiciones de victoria:\n");
+                            System.out.println("Diagonal1:" + juego.diagonal1() + " Diagonal2:" + juego.diagonal2() + " Filas:" + juego.filas() + " Columnas:" + juego.cols() + "\n");
+                        }
 
+                    } finally {
+                        lock.unlock();
                         // cambio asignacion de fichas
                         if (fichaActual == 'X') {
                             fichaActual = 'O';
                         } else {
                             fichaActual = 'X';
                         }
-
-                        // if (juego.algunGanador()) {
-                        //     System.out.println("FIIIIIN DEL JUEGOOOO");
-                        //     hablarCliente("FIN_DEL_JUEGO");
-                        //     fin = true;
-                        // } else {
-                        //     System.out.println(">tenfo que seguir<");
-                        //     hablarCliente("_SIGO_");
-                        // }
-
-                    } finally {
-                        lock.unlock();
                     }
+                    
                 }
 
             } while (!fin);

@@ -77,7 +77,7 @@ public class Juego {
         return filas() || cols() || diagonal1() || diagonal2();
     }
 
-    private boolean filas() {
+    public boolean filas() {
         boolean salida = false;
         int x = 0;
         int o = 0;
@@ -90,7 +90,7 @@ public class Juego {
         return salida;
     }
 
-    private boolean cols() {
+    public boolean cols() {
         boolean salida = false;
         int x = 0;
         int o = 0;
@@ -105,7 +105,7 @@ public class Juego {
         return salida;
     }
 
-    private boolean diagonal1() {
+    public boolean diagonal1() {
         boolean salida = false;
         int x = 0;
         int o = 0;
@@ -118,7 +118,7 @@ public class Juego {
         return salida;
     }
 
-    private boolean diagonal2() {
+    public boolean diagonal2() {
         boolean salida = false;
         int x = 0;
         int o = 0;

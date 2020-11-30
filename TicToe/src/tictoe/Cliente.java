@@ -40,16 +40,18 @@ public class Cliente {
 
             leerServidor(); // mando la ficha
             do {
-                
-                leerTablero();
-                leerServidor();
-                String ficha = in.nextLine();
-                mandarServidor(ficha);
                 cond = leerServidorR(); // leo si fin
-                // System.out.println("he leido del supuesto final2: ." + cond + ".");
+                System.out.println("he leido del supuesto final2: ." + cond + ".\n");
+                if(!"FIN".equals(cond)){
+                    leerTablero();
+                    leerServidor();
+                    String ficha = in.nextLine();
+                    mandarServidor(ficha);
+                }
 
-            } while (cond != "FIN_DEL_JUEGO");
+            } while (!"FIN".equals(cond));
             in.close();
+            System.out.println("HA SALIDO\n");
 
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,6 +68,7 @@ public class Cliente {
     }
 
     private static void leerTablero() throws IOException {
+        System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());
