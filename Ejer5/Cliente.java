@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +9,9 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author pablojj
+ *
+ * @author Pablo Jiménez Jiménez (pablojj1808@correo.ugr.es)
+ * @author Sergio Fernández Vela (sergiofern@correo.ugr.es)
  */
 public class Cliente {
 
@@ -29,24 +30,27 @@ public class Cliente {
         try {
             // Creamos una conexion entre el cliente y el servidor
             socketServicio = new Socket(host, port);
-
+            String cond;
+            
             //obtener los flujos en modo texto
             inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
             outPrinter = new PrintWriter(socketServicio.getOutputStream(), true);
-            
-            
-            
-        
 
-                System.out.println(inReader.readLine());
+            leerServidor(); // mando la ficha
+            do {
+                cond = leerServidorR(); // leo si fin
+                if(!"FIN".equals(cond)){
+                    leerTablero();
+                    leerServidor();
+                    leerServidor();
+                    String ficha = in.nextLine();
+                    mandarServidor(ficha);
+                }
 
-                leerTablero();
+            } while (!"FIN".equals(cond));
+            in.close();
+            leerTablero();
 
-            
-            
-            
-            
-            
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -61,7 +65,7 @@ public class Cliente {
 
     }
 
-    private static void leerTablero() throws Exception {
+    private static void leerTablero() throws IOException {
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());
         System.out.println(inReader.readLine());
@@ -72,5 +76,13 @@ public class Cliente {
     private static void mandarServidor(String s) {
         outPrinter.println(s);
         outPrinter.flush();
+    }
+
+    private static void leerServidor() throws IOException {
+        System.out.println(inReader.readLine());
+    }
+    
+    private static String leerServidorR() throws IOException {
+        return inReader.readLine();
     }
 }
