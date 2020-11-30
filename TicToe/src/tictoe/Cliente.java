@@ -41,9 +41,9 @@ public class Cliente {
             leerServidor(); // mando la ficha
             do {
                 cond = leerServidorR(); // leo si fin
-                System.out.println("he leido del supuesto final2: ." + cond + ".\n");
                 if(!"FIN".equals(cond)){
                     leerTablero();
+                    leerServidor();
                     leerServidor();
                     String ficha = in.nextLine();
                     mandarServidor(ficha);
@@ -51,7 +51,7 @@ public class Cliente {
 
             } while (!"FIN".equals(cond));
             in.close();
-            System.out.println("HA SALIDO\n");
+            leerTablero();
 
         } catch (UnknownError ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);

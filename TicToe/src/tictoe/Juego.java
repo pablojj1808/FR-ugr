@@ -36,7 +36,7 @@ public class Juego {
     }
     
     public String pintarTab() {
-        String tab = "";
+        String tab = " _ _ _\n";
         for(int i=0; i<3; i++){
             for(int j=0; j<3; j++){
                 tab += "|" + tablero[i][j];
@@ -77,16 +77,37 @@ public class Juego {
         return filas() || cols() || diagonal1() || diagonal2();
     }
 
+    public boolean empate(){
+        boolean empate=true;
+        if(!algunGanador()){
+            for (int j = 0; j < 3; j++){
+                for(int i=0; i<3;i++){
+                    if(tablero[j][i]=='_'){
+                        empate=false;
+                    }
+                }
+            }
+        }
+        else{
+            empate=false;
+        }
+        return empate;
+    }
+
     public boolean filas() {
         boolean salida = false;
         int x = 0;
         int o = 0;
-        for (int j = 0; j < 3; j++)
-            if (tablero[j][j] == 'X')
-                x++;
-            else if (tablero[j][j] == 'O')
-                o++;
-        if(x == 3 || o == 3) salida = true;
+        for (int j = 0; j < 3; j++){
+            for(int i=0; i<3;i++){    
+                if (tablero[j][i] == 'X')
+                    x++;
+                else if (tablero[j][i] == 'O')
+                    o++;
+            }
+            if(x == 3 || o == 3) salida = true;
+            x=0;o=0;
+        }
         return salida;
     }
 
@@ -94,14 +115,16 @@ public class Juego {
         boolean salida = false;
         int x = 0;
         int o = 0;
-        for (int i = 2, j=0; i >=0; i--, j++) {
-            if (tablero[i][j] == 'X')
-                x++;
-            else if (tablero[i][j] == 'O')
-                o++;
-
+        for (int j = 0; j < 3; j++){
+            for(int i=0; i<3;i++){    
+                if (tablero[i][j] == 'X')
+                    x++;
+                else if (tablero[i][j] == 'O')
+                    o++;
+            }
+            if(x == 3 || o == 3) salida = true;
+            x=0;o=0;
         }
-        if (x == 3 || o == 3) salida = true;
         return salida;
     }
 

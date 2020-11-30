@@ -18,6 +18,7 @@ public class ServidorConcurrente {
 
     private static final int MAX_CONEX = 2;
     private static int conexiones = 0;
+    
                                             
     public static void main(String[] args) {
 
@@ -41,10 +42,11 @@ public class ServidorConcurrente {
                     Procesador procesador = new Procesador(socketCliente);
                     procesador.start();
                 }
-            } while (true);
-
-//            socketCliente.close();
-//            serverSocket.close();
+            } while (!Juego.getInstance().algunGanador() && !Juego.getInstance().empate());
+            
+           serverSocket.close();
+           if(Juego.getInstance().empate()) System.out.println("El juego ha finalizado con un empate.");
+           if(Juego.getInstance().algunGanador()) System.out.println("El juego ha finalizado");
             
         } catch (IOException ex) {
             System.err.println("No se ha podido conectar en el puerto = " + port);

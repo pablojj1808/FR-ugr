@@ -26,7 +26,6 @@ class Procesador extends Thread {
 
     Procesador(Socket socketServicio) {
         this.socketCliente = socketServicio;
-        System.out.println(socketServicio.getInetAddress());
         juego = Juego.getInstance();
     }
 
@@ -39,7 +38,6 @@ class Procesador extends Thread {
             outPrinter = new PrintWriter(socketCliente.getOutputStream(), true);
             char ficha = juego.asignarFichas();
             hablarCliente("Tu ficha: " + ficha);
-            System.out.println("HA PASADO LA ASIGNACION\n" + fichaActual);
             do {
                 try 
                 {
@@ -51,29 +49,20 @@ class Procesador extends Thread {
                 }
                 // System.out.println(ficha + "----" + fichaActual);
                 if (ficha == fichaActual) {
-                    System.out.println("HA PASADO EL LOCK\n");
                     lock.lock();
                     try {
-                        if (juego.algunGanador()) {
-                            System.out.println("FIIIIIN DEL JUEGOOOO");
+                        if (juego.algunGanador() || juego.empate()) {
                             hablarCliente("FIN");
                             fin = true;
                         } else {
-                            System.out.println(">tenfo que seguir<");
                             hablarCliente("_SIGO_");
                         }
                         if(!fin){
                             hablarCliente(juego.pintarTab());
-                            hablarCliente("Introduce tu jugada (1-3,1-3): \n");
-                            System.out.println("ESTA ESPERANDO A LA RESPUESTA\n");
+                            hablarCliente("Introduce tu jugada (1-3,1-3):\n");
                             String algo = inReader.readLine();
-                            System.out.println("LA HA RECIBIDO\n");
                             juego.putFicha(algo);
-
-                            System.out.println("Condiciones de victoria:\n");
-                            System.out.println("Diagonal1:" + juego.diagonal1() + " Diagonal2:" + juego.diagonal2() + " Filas:" + juego.filas() + " Columnas:" + juego.cols() + "\n");
                         }
-
                     } finally {
                         lock.unlock();
                         // cambio asignacion de fichas
@@ -83,11 +72,10 @@ class Procesador extends Thread {
                             fichaActual = 'X';
                         }
                     }
-                    
                 }
 
             } while (!fin);
-
+            hablarCliente(juego.pintarTab());
             socketCliente.close();
 
         } catch (IOException e) {
