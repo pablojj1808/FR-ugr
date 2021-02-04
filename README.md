@@ -1,11 +1,4 @@
-# FR-ugr
------
-
-## Reparticiones
-
-	Entrega : 4 diciembre
-	
-	Sergio  : ejer 2 y 4
-	Pablo   : ejer 1 y 3
-	
-	Ejer 5  : hablamos...
+Práctica 2 de la asignatura **Fundamentos de Redes** grado Ingeniería Informática UGR.
+Realizada por:
+- (Sergio Fernández Vela)[https://github.com/Sad-Potato]
+- (Pablo Jiménez Jiménez)[https://github.com/pablojj1808]
